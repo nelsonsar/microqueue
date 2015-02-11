@@ -19,7 +19,7 @@ class Consumer
         $errorCode = 0;
 
         for ($i = 1; $i <= $numberOfUnreadMessages; $i++) {
-            $result = msg_receive(
+            $result = @msg_receive(
                 $queueResource,
                 self::CONSUMER_DEFAULT_MESSAGE_TYPE,
                 $receivedMessageType,
@@ -29,6 +29,10 @@ class Consumer
                 $flags,
                 $errorCode
             );
+
+            if (self::CONSUMER_DEFAULT_MESSAGE_TYPE != $receivedMessageType) {
+                continue;
+            }
 
             if (false === $result) {
                 throw new \RuntimeException(sprintf('Message is greater than the allowed size of %d bytes', $messageMaxSize));
