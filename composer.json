@@ -1,0 +1,21 @@
+{
+    "name": "nelsonsar/microqueue",
+    "type": "library",
+    "homepage": "http://github.com/nelsonsar/microqueue",
+    "license": "MIT",
+    "authors": [
+        {
+        "name": "Nelson Senna",
+        "email": "onelsonsenna@gmail.com"
+        }
+    ],
+    "require": {
+        "nelsonsar/nash": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    },
+    "autoload": {
+        "psr-4": { "MicroQueue\\": "src/MicroQueue" }
+    }
+}
