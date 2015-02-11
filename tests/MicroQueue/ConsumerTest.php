@@ -31,19 +31,4 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($callbackWasExecuted);
     }
-
-    public function testConsumeShouldNotExecuteCallbackWhenMessageTypeIsNotTheExpectedOne()
-    {
-        $this->markTestIncomplete('Need to create a configurable producer to make tests');
-
-        $consumer = new Consumer;
-
-        $callbackWasExecuted = false;
-
-        $consumer->consume($this->queue, function($message, $consumer) use (&$callbackWasExecuted) {
-            $callbackWasExecuted = true;
-        });
-
-        $this->assertFalse($callbackWasExecuted);
-    }
 }
