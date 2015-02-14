@@ -41,10 +41,8 @@ class Producer
 
     private function parseErrorCode($errorCode)
     {
-        if (MSG_EAGAIN == $errorCode) {
-            return self::ERROR_PRODUCER_QUEUE_IS_FULL;
-        } elseif (PosixErrorCode::EINVAL == $errorCode) {
-            return self::ERROR_PRODUCER_MESSAGE_BUFFER_OVERFLOW;
-        }
+        if (PosixErrorCode::EINVAL == $errorCode) return self::ERROR_PRODUCER_MESSAGE_BUFFER_OVERFLOW;
+
+        return self::ERROR_PRODUCER_SEND_UNKNOWN_ERROR;
     }
 }
