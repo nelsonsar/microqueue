@@ -4,8 +4,48 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8a878eb202740460785f9b96f764f7b9",
+    "hash": "d103fce160702fda58e958343ca91c91",
     "packages": [
+        {
+            "name": "nelsonsar/armadillo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelsonsar/armadillo.git",
+                "reference": "4ccee02d0af32d4095d59c8bc3db57cf469e8abf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelsonsar/armadillo/zipball/4ccee02d0af32d4095d59c8bc3db57cf469e8abf",
+                "reference": "4ccee02d0af32d4095d59c8bc3db57cf469e8abf",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "@stable"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Armadillo\\": "src/Armadillo"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelson Senna",
+                    "email": "onelsonsenna@gmail.com"
+                },
+                {
+                    "name": "Gabriel Schmitt",
+                    "email": "gabrielsch@outlook.com"
+                }
+            ],
+            "homepage": "http://github.com/nelsonsar/armadillo",
+            "time": "2014-08-22 17:19:16"
+        },
         {
             "name": "nelsonsar/nash",
             "version": "dev-master",
@@ -1000,6 +1040,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "nelsonsar/nash": 20,
+        "nelsonsar/armadillo": 20,
         "phpunit/phpunit": 0
     },
     "prefer-stable": false,

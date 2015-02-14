@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "nelsonsar/nash": "dev-master"
+        "nelsonsar/nash": "dev-master",
+        "nelsonsar/armadillo": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable"
