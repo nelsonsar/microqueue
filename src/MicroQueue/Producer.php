@@ -6,10 +6,8 @@ class Producer
 {
     private $queue = null;
 
-    const ERROR_PRODUCER_QUEUE_IS_FULL = 'Queue reached max number of messages';
-    const ERROR_PRODUCER_SEND_UNKNOWN_ERROR = 'Unknown error';
+    const ERROR_PRODUCER_SEND_UNKNOWN_ERROR = 'Unknown error. Please report it.';
     const PRODUCER_DEFAULT_MESSAGE_TYPE = 1;
-    const ERROR_PRODUCER_MESSAGE_BUFFER_OVERFLOW = 'Message size is larger than the allowed value';
 
     public function __construct(Queue $queue)
     {
@@ -18,7 +16,7 @@ class Producer
 
     public function publish($message)
     {
-        if (empty($message)) throw new \RuntimeException('Message cannot be empty');
+        if (empty($message)) throw new Exception\EmptyMessageException;
 
         $queueResource = $this->queue->getResource();
         $serializeMessage = true;
@@ -34,15 +32,15 @@ class Producer
             $errorCode
         );
 
-        if (false === $result) throw new \RuntimeException($this->parseErrorCode($errorCode));
+        if (false === $result) $this->throwExceptionForErrorCode($errorCode);
 
         return true;
     }
 
-    private function parseErrorCode($errorCode)
+    private function throwExceptionForErrorCode($errorCode)
     {
-        if (PosixErrorCode::EINVAL == $errorCode) return self::ERROR_PRODUCER_MESSAGE_BUFFER_OVERFLOW;
+        if (PosixErrorCode::EINVAL == $errorCode) throw new Exception\MessageBufferSizeOverflowException;
 
-        return self::ERROR_PRODUCER_SEND_UNKNOWN_ERROR;
+        throw new \RuntimeException(self::ERROR_PRODUCER_SEND_UNKNOWN_ERROR);
     }
 }

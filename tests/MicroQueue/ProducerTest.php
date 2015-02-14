@@ -20,8 +20,8 @@ class ProducerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Message size is larger than the allowed value
+     * @expectedException MicroQueue\Exception\MessageBufferSizeOverflowException
+     * @expectedExceptionMessage Message is greater than the allowed size
      */
     public function testPublishShouldThrowExceptionWhenMessageSizeIsLargerThanPermitted()
     {
@@ -31,7 +31,7 @@ class ProducerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException MicroQueue\Exception\EmptyMessageException
      * @expectedExceptionMessage Message cannot be empty
      * @dataProvider emptyMessageProvider
      */

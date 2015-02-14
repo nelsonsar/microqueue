@@ -18,27 +18,21 @@ class Consumer
         $flags = 0;
         $errorCode = 0;
 
-        for ($i = 1; $i <= $numberOfUnreadMessages; $i++) {
-            $result = @msg_receive(
-                $queueResource,
-                self::CONSUMER_DEFAULT_MESSAGE_TYPE,
-                $receivedMessageType,
-                $messageMaxSize,
-                $receivedMessage,
-                $unserializeMessage,
-                $flags,
-                $errorCode
-            );
+        $result = @msg_receive(
+            $queueResource,
+            self::CONSUMER_DEFAULT_MESSAGE_TYPE,
+            $receivedMessageType,
+            $messageMaxSize,
+            $receivedMessage,
+            $unserializeMessage,
+            $flags,
+            $errorCode
+        );
 
-            if (self::CONSUMER_DEFAULT_MESSAGE_TYPE != $receivedMessageType) {
-                continue;
-            }
+        if (false === $result) throw new Exception\MessageBufferSizeOverflowException;
 
-            if (false === $result) {
-                throw new \RuntimeException(sprintf('Message is greater than the allowed size of %d bytes', $messageMaxSize));
-            }
+        if (self::CONSUMER_DEFAULT_MESSAGE_TYPE != $receivedMessageType) continue;
 
-            call_user_func_array($callback, array($receivedMessage, $this));
-        }
+        call_user_func_array($callback, array($receivedMessage, $this));
     }
 }
