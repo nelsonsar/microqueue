@@ -7,19 +7,19 @@ class Consumer
     const CONSUMER_DEFAULT_MESSAGE_TYPE = 1;
 
     private $eventDispatcher = null;
+    private $queue = null;
 
-    public function __construct(\Armadillo\EventDispatcher $eventDispatcher)
+    public function __construct(Queue $queue, \Armadillo\EventDispatcher $eventDispatcher)
     {
+        $this->queue = $queue;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function consume(Queue $queue, callable $callback)
+    public function consume(callable $callback)
     {
-        $numberOfUnreadMessages = $queue->getNumberUnreadMessages();
-
-        $queueResource = $queue->getResource();
+        $queueResource = $this->queue->getResource();
         $receivedMessageType = null;
-        $messageMaxSize = $queue->getMessageAllowedSize();
+        $messageMaxSize = $this->queue->getMessageAllowedSize();
         $receivedMessage = null;
         $unserializeMessage = true;
         $flags = 0;
