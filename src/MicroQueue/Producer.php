@@ -8,6 +8,7 @@ class Producer
 
     const ERROR_PRODUCER_SEND_UNKNOWN_ERROR = 'Unknown error. Please report it.';
     const PRODUCER_DEFAULT_MESSAGE_TYPE = 1;
+    const POSIX_INVALID_ARGUMENT_ERROR_CODE = 22;
 
     public function __construct(Queue $queue)
     {
@@ -39,7 +40,9 @@ class Producer
 
     private function throwExceptionForErrorCode($errorCode)
     {
-        if (PosixErrorCode::EINVAL == $errorCode) throw new Exception\MessageBufferSizeOverflowException;
+        if (self::POSIX_INVALID_ARGUMENT_ERROR_CODE == $errorCode) {
+            throw new Exception\MessageBufferSizeOverflowException;
+        }
 
         throw new \RuntimeException(self::ERROR_PRODUCER_SEND_UNKNOWN_ERROR);
     }
