@@ -6,6 +6,13 @@ class Consumer
 {
     const CONSUMER_DEFAULT_MESSAGE_TYPE = 1;
 
+    private $eventDispatcher = null;
+
+    public function __construct(\Armadillo\EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     public function consume(Queue $queue, callable $callback)
     {
         $numberOfUnreadMessages = $queue->getNumberUnreadMessages();
@@ -33,6 +40,6 @@ class Consumer
 
         if (self::CONSUMER_DEFAULT_MESSAGE_TYPE != $receivedMessageType) continue;
 
-        call_user_func_array($callback, array($receivedMessage, $this));
+        call_user_func_array($callback, array($receivedMessage, $this->eventDispatcher));
     }
 }

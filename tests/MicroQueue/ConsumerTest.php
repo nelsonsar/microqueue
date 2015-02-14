@@ -21,14 +21,19 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 
     public function testConsumeShouldExecuteGivenCallback()
     {
-        $consumer = new Consumer;
+        $eventDispatcher = new \Armadillo\EventDispatcher;
+        $consumer = new Consumer($eventDispatcher);
 
         $callbackWasExecuted = false;
-
-        $consumer->consume($this->queue, function($message, $consumer) use (&$callbackWasExecuted) {
+        $eventDispatcherClass = "";
+        $consumeCallback = function($message, $eventDispatcher) use (&$callbackWasExecuted, &$eventDispatcherClass) {
             $callbackWasExecuted = true;
-        });
+            $eventDispatcherClass = get_class($eventDispatcher);
+        };
+
+        $consumer->consume($this->queue, $consumeCallback);
 
         $this->assertTrue($callbackWasExecuted);
+        $this->assertEquals("Armadillo\EventDispatcher", $eventDispatcherClass);
     }
 }
