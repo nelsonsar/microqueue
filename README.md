@@ -42,6 +42,10 @@ $producer->publish('This is a test' . PHP_EOL);
 
 This should be enough to start publishing messages. The *examples* folder has one example on how to use events to extend consumer functionality.
 
+## Installation
+
+This package is available on [Packagist](https://packagist.org/packages/nelsonsar/microqueue) and you can use [composer](https://getcomposer.org/) to install it.
+
 ## MicroQueue is a replacement for other services?
 
 **NO**. Because of the following reasons:
