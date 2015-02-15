@@ -2,7 +2,7 @@
 
 namespace MicroQueue;
 
-class Producer
+final class Producer
 {
     private $queue = null;
 

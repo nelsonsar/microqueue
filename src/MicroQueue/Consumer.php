@@ -2,7 +2,7 @@
 
 namespace MicroQueue;
 
-class Consumer
+final class Consumer
 {
     const CONSUMER_DEFAULT_MESSAGE_TYPE = 1;
 

@@ -2,7 +2,7 @@
 
 namespace MicroQueue;
 
-class Queue
+final class Queue
 {
     private $resource = null;
     private $ownerId = null;
