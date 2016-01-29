@@ -38,7 +38,7 @@ final class Consumer
 
         if (false === $result) throw new Exception\MessageBufferSizeOverflowException;
 
-        if (self::CONSUMER_DEFAULT_MESSAGE_TYPE != $receivedMessageType) continue;
+        if (self::CONSUMER_DEFAULT_MESSAGE_TYPE != $receivedMessageType) return;
 
         call_user_func_array($callback, array($receivedMessage, $this->eventDispatcher));
     }
