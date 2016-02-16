@@ -16,7 +16,7 @@ It's really, really simple:
 
 ```MicroQueue``` does not have any configuration and use events to give you more flexibility! (Of course it was the only thing that I could think to avoid my consumer to know the producer... So, sorry).
 
-The script above is an example of how simple it is:
+The script below is an example of how simple it is:
 
 ```php
 
@@ -50,7 +50,7 @@ This package is available on [Packagist](https://packagist.org/packages/nelsonsa
 
 **NO**. Because of the following reasons:
 
-- ```MicroQueue``` have a blocking nature (and most of the other services are not) and this is not nice for big jobs;
+- ```MicroQueue``` has a blocking nature (and most of the other services have not) and this is not nice for big jobs;
 - ```MicroQueue``` is limited by session (consumer and producer need to exist in same session of Linux, for example) and by your OS (OS controls number of queues, number of messages and message size);
 - ```MicroQueue``` tests will start soon (in a production environment) so I cannot ensure its reliability.
 
